@@ -3,31 +3,40 @@ from django.http import HttpResponse
 from phones.models import Phone
 
 def show_catalog(request):
+
+    # if sd != None:
     template = 'catalog.html'
+
+    # caro = Phone.objects.all()
     caro = Phone.objects.all()
-    print(caro.order_by('price'),'#######')
-    caro = caro.order_by('price')
-    context = {caro}
+    if 'nm' in request.GET:
+        caro = caro.order_by('name')
+    elif 'prd' in request.GET: 
+        caro = caro.order_by('-price')
+    elif 'prh' in request.GET: 
+        caro = caro.order_by('price')
+    else: 
+        caro = caro
+    # else:
+    #     template = 'catalog_d.html'
+    #     print(sd,'+++++++++++++')
+    #     caro = Phone.objects.filter(slug__icontains = sd)
+    # print(caro.order_by('price'),'#######')
+    
     return render(
         request,
         template,
-        context
+        {'caro':caro}
     )
 
-def list_phone(request):
-    template = 'base.html'
-    caro = Phone.objects.all()
-    print(caro.order_by('price'),'#######')
-    caro = caro.order_by('price')
-    # cars = [f'{c.name}, стоимость: {c.price}, {c.image}' for c in caro]
-    # context = {caro}
-    return render(
-                request,
-                template,
-                caro
-    )#HttpResponse('<br>'.join(cars))
-
+def show_catalogd(request,sd):
+    template = 'catalog_d.html'
+    print(sd,'+++++++++++++')
+    caro = Phone.objects.filter(slug__icontains = sd)
+    # print(caro.order_by('price'),'#######')
     
+    return render(request,template,{'caro':caro})#HttpResponse('<br>'.join(cars))
+
 # def create_csv(request):
 #     fg = csv.reader('phones.csv',delimiter=';')
 #     print('______')

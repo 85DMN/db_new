@@ -15,7 +15,6 @@ class Command(BaseCommand):
                 if con==0:
                     pass
                 else:
-                    print(row,'####################')
                     Phone.objects.create(id=row[0],name=row[1],price=row[3],image=row[2],release_data=row[4],lte_exists=row[5],slug=slugify(row[1]))
                 con+=1
        

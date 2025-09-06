@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.text import slugify
+# from django.utils.text import slugify
 
 # Create your models here.
 class Phone(models.Model):
@@ -10,8 +10,7 @@ class Phone(models.Model):
     release_data = models.DateField()
     lte_exists = models.BooleanField()
     slug = models.CharField(max_length=50,unique=True)
-
-    # def __str__(self):
-    #     return self.name
-
+    
+    def __str__(self):
+        return self.name
 

@@ -5,18 +5,6 @@
 {% block content %}
     <div class="container">
         
-        <div class="header">
-            <!-- <h1>Каталог</h1> -->
-            <h1>Сравнение телефонов</h1>
-            <p><b>Сортировать по</b></p>
-                <form method="get">{% csrf_token %}
-                    <button name="nm">Названию</button>
-                    
-                    <button name="prh">Начать с дешевых</button>
-                    <button name="prd">Начать с дорогих</button>
-                </form>
-            
-        </div>
         <ul class="hr">
             {% for el in caro %} 
                 <div> <class = "alert alert-warning"> 
